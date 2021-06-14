@@ -11,14 +11,10 @@ const io = require("socket.io")(server, {
 
 app.use(cors());
 
-const hostname = process.env.HOSTNAME || "127.0.0.1";
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/html");
-  res.send("It is a Running server yayy!!");
-  res.end();
+  res.send("Running");
 });
 
 io.on("connection", (socket) => {
@@ -37,6 +33,4 @@ io.on("connection", (socket) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
